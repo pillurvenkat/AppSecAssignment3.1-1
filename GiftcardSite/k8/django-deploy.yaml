@@ -19,12 +19,10 @@ spec:
           image: nyuappsec/assign3:v0
           ports:
             - containerPort: 8000
+          envFrom:
+          - secretRef:
+             name: mysql-secret
           env:
-            - name: MYSQL_ROOT_PASSWORD
-              value: thisisatestthing. 
-
-            - name: MYSQL_DB
-              value: GiftcardSiteDB
 
             - name: MYSQL_HOST
               value: mysql-service
