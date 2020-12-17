@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: mysql-seed-job
+spec:
+  template:
+    metadata:
+     creationTimestamp: null
+    spec:
+      containers:
+      - image: nyuappsec/assign3-db:v0
+        name: mysql-seed-job
+        resources: {}
+        volumeMounts:
+            - name: mysql-volume-mount
+              mountPath: /var/lib/mysql
+      restartPolicy: Never
+ 
+      volumes:
+        - name: mysql-volume-mount
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+status: {}

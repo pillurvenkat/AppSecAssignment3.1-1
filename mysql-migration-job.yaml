@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: mysql-migration-job
+spec:
+  template:
+    metadata:
+     creationTimestamp: null
+    spec
+      containers:
+      - image: busybox
+        args:
+        - /bin/sh
+        - -c
+        - cp -R /var/lib/busybox /var/lib/mysql; exit 0
+        name: mysql-migration-job
+        resources: {}
+        volumeMounts:
+        - name: mysql-volume-mount
+          mountPath: /var/lib/mysql
+          
+        - name: mysql-volume-mount
+          mountPath: /var/lib/busybox
+      restartolicy: Never
+      volumes:
+        - name: mysql-volume-mount
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+status: {}
