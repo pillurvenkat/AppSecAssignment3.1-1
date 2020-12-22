@@ -19,7 +19,7 @@ graphs = {}
 graphs['g_counter'] = Counter('python_request_g_posts', 'The total number'\
   + ' of card gift posts.')
 graphs['u_counter'] = Counter('python_request_u_posts', 'The total number'\
-  + ' of card use posts.')
+  + ' Error 404: Internal Server Error.')
 
 # Create your views here.
 # Landing page. Nav bar, most recently bought cards, etc.
