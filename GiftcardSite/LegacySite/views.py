@@ -16,9 +16,7 @@ SALT_LEN = 16
 # Prometheus stuff!
 graphs = {}
 
-graphs['g_counter'] = Counter('python_request_g_posts', 'The total number'\
-  + ' of card gift posts.')
-graphs['u_counter'] = Counter('python_request_u_posts', 'The total number'\
+graphs['u_counter'] = Counter('python_request_HttpResponse', 'The total number'\
   + ' Error 404: Internal Server Error.')
 
 # Create your views here.
