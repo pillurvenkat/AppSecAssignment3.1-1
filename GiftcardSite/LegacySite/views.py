@@ -15,12 +15,7 @@ SALT_LEN = 16
 
 # Prometheus stuff!
 graphs = {}
-graphs['r_counter'] = Counter('python_request_r_posts', 'The total number'\
-  + ' of register posts.')
-graphs['l_counter'] = Counter('python_request_l_posts', 'The total number'\
-  + ' of login posts.')
-graphs['b_counter'] = Counter('python_request_b_posts', 'The total number'\
-  + ' of card buy posts.')
+
 graphs['g_counter'] = Counter('python_request_g_posts', 'The total number'\
   + ' of card gift posts.')
 graphs['u_counter'] = Counter('python_request_u_posts', 'The total number'\
