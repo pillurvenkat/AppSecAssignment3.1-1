@@ -7,22 +7,15 @@ spec:
   template:
     metadata:
      creationTimestamp: null
-    spec
+    spec:
       containers:
-      - image: busybox
-        args:
-        - /bin/sh
-        - -c
-        - cp -R /var/lib/busybox /var/lib/mysql; exit 0
+      - image: nyuappsec/assign3-db-migration:v0
         name: mysql-migration-job
         resources: {}
         volumeMounts:
         - name: mysql-volume-mount
           mountPath: /var/lib/mysql
-          
-        - name: mysql-volume-mount
-          mountPath: /var/lib/busybox
-      restartolicy: Never
+      restartPolicy: Never   
       volumes:
         - name: mysql-volume-mount
           persistentVolumeClaim:
