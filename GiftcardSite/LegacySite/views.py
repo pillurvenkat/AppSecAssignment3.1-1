@@ -32,7 +32,6 @@ def register_view(request):
     if request.method == 'GET':
         return render(request, "register.html", {'method':'GET'})
     else:
-        graphs['r_counter'].inc()
         context = {'method':'POST'}
         uname = request.POST.get('uname', None)
         pword = request.POST.get('pword', None)
@@ -61,7 +60,6 @@ def login_view(request):
     if request.method == "GET":
         return render(request, "login.html", {'method':'GET', 'failed':False})
     else:
-        graphs['l_counter'].inc()
         context = {'method':'POST'}
         uname = request.POST.get('uname', None)
         pword = request.POST.get('pword', None)
@@ -101,14 +99,13 @@ def buy_card_view(request, prod_num=0):
             except:
                 return HttpResponse("ERROR: 404 Not Found.")
                 graphs['u_counter'].inc()
-        context['prod_name'] = prod.product_name
+               context['prod_name'] = prod.product_name
         context['prod_path'] = prod.product_image_path
         context['price'] = prod.recommended_price
         context['description'] = prod.description
         return render(request, "item-single.html", context)
     elif request.method == 'POST':
-        graphs['b_counter'].inc()
-        if prod_num == 0:
+       if prod_num == 0:
             prod_num = 1
         num_cards = len(Card.objects.filter(user=request.user))
         # Generate a card here, based on amount sent. Need binary for this.
@@ -146,26 +143,27 @@ def gift_card_view(request, prod_num=0):
                 prod = Product.objects.get(product_id=prod_num) 
             except:
                 return HttpResponse("ERROR: 404 Not Found.")
-                graphs['u_counter'].inc()
+               graphs['u_counter'].inc()
+                
         else:
             try:
                 prod = Product.objects.get(product_id=1) 
             except:
                 return HttpResponse("ERROR: 404 Not Found.")
-                graphs['u_counter'].inc()
+               graphs['u_counter'].inc()
         context['prod_name'] = prod.product_name
         context['prod_path'] = prod.product_image_path
         context['price'] = prod.recommended_price
         context['description'] = prod.description
         return render(request, "gift.html", context)
     elif request.method == "POST":
-        graphs['g_counter'].inc()
+   
         if prod_num == 0:
             prod_num = 1
         user = request.POST.get('username', None)
         if user is None:
             return HttpResponse("ERROR 404")
-            graphs['u_counter'].inc()
+           graphs['u_counter'].inc()
         try:
             user_account = User.objects.get(username=user)
         except:
@@ -197,7 +195,7 @@ def use_card_view(request):
         context['card'] = None
         return render(request, 'use-card.html', context)
     elif request.method == "POST" and request.POST.get('card_supplied', False):
-        graphs['u_counter'].inc()
+     
         # Post with specific card, use this card.
         context['card_list'] = None
         # Need to write this to parse card type.
@@ -239,7 +237,7 @@ def use_card_view(request):
         context['card'] = card
         return render(request, "use-card.html", context) 
     elif request.method == "POST":
-        graphs['u_counter'].inc()
+ 
         card = Card.objects.get(id=request.POST.get('card_id', None))
         card.used=True
         card.save()
