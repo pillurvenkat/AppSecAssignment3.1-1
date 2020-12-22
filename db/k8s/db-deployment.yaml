@@ -16,12 +16,9 @@ spec:
       containers:
         - name: mysql-container
           image: nyuappsec/assign3-db:v0
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              value: thisisatestthing.
-
-            - name: MYSQL_DB
-              value: GiftcardSiteDB
+          envFrom:
+          - secretRef:
+             name: mysql-secret
 
           ports:
             - containerPort: 3306
