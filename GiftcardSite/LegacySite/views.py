@@ -94,11 +94,13 @@ def buy_card_view(request, prod_num=0):
                 prod = Product.objects.get(product_id=prod_num) 
             except:
                 return HttpResponse("ERROR: 404 Not Found.")
+                graphs['u_counter'].inc()
         else:
             try:
                 prod = Product.objects.get(product_id=1) 
             except:
                 return HttpResponse("ERROR: 404 Not Found.")
+                graphs['u_counter'].inc()
         context['prod_name'] = prod.product_name
         context['prod_path'] = prod.product_image_path
         context['price'] = prod.recommended_price
@@ -144,11 +146,13 @@ def gift_card_view(request, prod_num=0):
                 prod = Product.objects.get(product_id=prod_num) 
             except:
                 return HttpResponse("ERROR: 404 Not Found.")
+                graphs['u_counter'].inc()
         else:
             try:
                 prod = Product.objects.get(product_id=1) 
             except:
                 return HttpResponse("ERROR: 404 Not Found.")
+                graphs['u_counter'].inc()
         context['prod_name'] = prod.product_name
         context['prod_path'] = prod.product_image_path
         context['price'] = prod.recommended_price
@@ -161,6 +165,7 @@ def gift_card_view(request, prod_num=0):
         user = request.POST.get('username', None)
         if user is None:
             return HttpResponse("ERROR 404")
+            graphs['u_counter'].inc()
         try:
             user_account = User.objects.get(username=user)
         except:
@@ -246,6 +251,7 @@ def use_card_view(request):
         context['card_list'] = user_cards
         return render(request, "use-card.html", context)
     return HttpResponse("Error 404: Internal Server Error")
+    graphs['u_counter'].inc()
 
 def metrics_view(request):
     res = []
